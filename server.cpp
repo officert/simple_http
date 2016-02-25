@@ -8,11 +8,7 @@ using namespace std;
 //Functions prototypes
 int connectToSocket(int socketDesc, struct sockaddr_in *socketAddr, socklen_t addressLength);
 
-Server::Server() {
-
-}
-
-void Server::initServer() const
+void Server::initServer()
 {
   int socket_desc;
   struct sockaddr_in server;

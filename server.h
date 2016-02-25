@@ -3,9 +3,7 @@
 
 class Server {
   public:
-    Server();
-
-    void initServer() const;
+    void initServer();
 };
 
 #endif
