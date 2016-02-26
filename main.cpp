@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "server.h"
+#include "http_client.h"
 
 using namespace std;
 
@@ -9,9 +9,15 @@ using namespace std;
 // void display_help();
 
 int main(int argc, char* argv[]) {
-	Server server;
+	HttpClient httpClient;
 
-	server.initServer();
+	const char *address = "216.58.219.206";
+
+	try {
+		httpClient.get(address);
+	} catch (const char* exception) {
+		cout << "Error : " << exception << endl;
+	}
 
 	return 0;
 }
