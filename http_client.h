@@ -1,7 +1,9 @@
 #ifndef HTTPCLIENT_H
 #define HTTPCLIENT_H
 
-class HttpClient {
+#include "base_client.h"
+
+class HttpClient : public BaseClient  {
   public:
     void get(const char *);
 };

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <arpa/inet.h>
 
-#include "base_client.h"
 #include "http_client.h"
 
 using namespace std;

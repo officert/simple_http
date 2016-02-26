@@ -1,8 +1,8 @@
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef BASECLIENT_H
+#define BASECLIENT_H
 
 class BaseClient {
-  public:
+  protected:
     void create_socket();
 };
 
