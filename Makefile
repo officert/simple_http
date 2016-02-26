@@ -1,11 +1,16 @@
+SRC_DIR = src
+BUILD_DIR = build
 PROGRAM_NAME = main
 GCC = g++
 
-build:
-	$(GCC) *.cpp -o $(PROGRAM_NAME)
+build: clean
+	mkdir $(BUILD_DIR); \
+	$(GCC) $(SRC_DIR)/*.cpp -o $(BUILD_DIR)/$(PROGRAM_NAME)
 
 clean:
-	rm *.gch
+	rm -rf $(BUILD_DIR)
 
 run:
-	./$(PROGRAM_NAME) ${ARGS}
+	$(BUILD_DIR)/$(PROGRAM_NAME) ${ARGS}
+
+.PHONY: build
