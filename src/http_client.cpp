@@ -18,5 +18,5 @@ void HttpClient::get(const char *address)
   cout << "HTTP GET" << endl;
   cout << "Send to " << address << endl;
 
-  this->create_socket(address, message, port);
+  this->send_message(address, message, port);
 }

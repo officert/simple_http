@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void BaseClient::create_socket(const char* address, const char* message, const int port)
+void BaseClient::send_message(const char* address, const char* message, const int port)
 {
   if (address == NULL)
   {
