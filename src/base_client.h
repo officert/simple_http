@@ -3,7 +3,7 @@
 
 class BaseClient {
   protected:
-    void create_socket();
+    void create_socket(const char*);
 };
 
 #endif
