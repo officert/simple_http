@@ -5,9 +5,6 @@
 
 using namespace std;
 
-//Functions prototypes
-int connectToSocket(int socketDesc, struct sockaddr_in *socketAddr, socklen_t addressLength);
-
 void BaseClient::create_socket(const char* address, const char* message, const int port)
 {
   if (address == NULL)
@@ -17,10 +14,6 @@ void BaseClient::create_socket(const char* address, const char* message, const i
   if (message == NULL)
   {
     throw "message cannot be null";
-  }
-  if (port == NULL)
-  {
-    throw "port cannot be null";
   }
 
   int socket_desc;
@@ -40,11 +33,17 @@ void BaseClient::create_socket(const char* address, const char* message, const i
   server.sin_family = AF_INET;
   server.sin_port = htons(port);
 
-  int connected = connectToSocket(socket_desc, &server, sizeof(server));
+  int connected = connect(socket_desc, (struct sockaddr *)&server, sizeof(server));
 
-  int messageSent = write(socket_desc, message, strlen(message));
+  if(connected >= 0) {
+    puts("Connected");
+  } else {
+    puts("Error connecting");
+  }
 
-  if (messageSent < 0) {
+  int message_sent = write(socket_desc, message, strlen(message));
+
+  if (message_sent < 0) {
     puts("Send failed");
   } else {
     puts("Data Sent\n");
@@ -60,16 +59,4 @@ void BaseClient::create_socket(const char* address, const char* message, const i
 
     close(socket_desc);
   }
-}
-
-int connectToSocket(int socketDesc, struct sockaddr_in *socketAddr, socklen_t addressLength) {
-  int connected = connect(socketDesc, (struct sockaddr *)socketAddr, addressLength);
-
-  if(connected >= 0) {
-    puts("Connected");
-  } else {
-    puts("Error connecting");
-  }
-
-  return connected;
 }
