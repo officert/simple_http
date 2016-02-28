@@ -5,7 +5,7 @@
 
 class HttpClient : public BaseClient  {
   public:
-    char* get(const char *);
+    std::string get(const std::string);
 };
 
 #endif

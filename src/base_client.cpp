@@ -5,17 +5,8 @@
 
 using namespace std;
 
-char* BaseClient::send_message(const char* address, const char* message, const int port)
+std::string BaseClient::send_message(const std::string address, const std::string message, const int port)
 {
-  if (address == NULL)
-  {
-    throw "address cannot be null";
-  }
-  if (message == NULL)
-  {
-    throw "message cannot be null";
-  }
-
   int socket_desc;
   struct sockaddr_in server;
   char *server_reply = new char[2000];
@@ -27,7 +18,7 @@ char* BaseClient::send_message(const char* address, const char* message, const i
     throw "Error creating ocket";
   }
 
-  server.sin_addr.s_addr = inet_addr(address);
+  server.sin_addr.s_addr = inet_addr(address.c_str());
   server.sin_family = AF_INET;
   server.sin_port = htons(port);
 
@@ -38,7 +29,7 @@ char* BaseClient::send_message(const char* address, const char* message, const i
     throw "Error connecting to socket";
   }
 
-  int message_sent = write(socket_desc, message, strlen(message));
+  int message_sent = write(socket_desc, message.c_str(), strlen(message.c_str()));
 
   if (message_sent < 0)
   {

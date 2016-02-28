@@ -10,9 +10,9 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	HttpClient httpClient;
-	char* response;
+	std::string response;
 
-	const char *address = "216.58.219.206";
+	const std::string address = "216.58.219.206";
 
 	try {
 		response = httpClient.get(address);

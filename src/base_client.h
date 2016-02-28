@@ -3,7 +3,7 @@
 
 class BaseClient {
   protected:
-    char* send_message(const char* address, const char* message, const int port);
+    std::string send_message(const std::string address, const std::string message, const int port);
 };
 
 #endif

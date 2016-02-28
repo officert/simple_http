@@ -5,19 +5,11 @@
 
 using namespace std;
 
-char* HttpClient::get(const char *address)
+std::string HttpClient::get(const std::string address)
 {
-  const char* message = "GET / HTTP/1.1\r\n\r\n";
+  const std::string message = "GET / HTTP/1.1\r\n\r\n";
   const int port = 80;
-  char* response;
-
-  if (address == NULL)
-  {
-    throw "address cannot be null";
-  }
-
-  // cout << "HTTP GET" << endl;
-  // cout << "Send to " << address << endl;
+  std::string response;
 
   response = this->send_message(address, message, port);
 
