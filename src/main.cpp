@@ -10,11 +10,15 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	HttpClient httpClient;
+	char* response;
 
 	const char *address = "216.58.219.206";
 
 	try {
-		httpClient.get(address);
+		response = httpClient.get(address);
+
+		cout << "RESPONSE" << endl;
+		cout << response << endl;
 	} catch (const char* exception) {
 		cout << "Error : " << exception << endl;
 	}

@@ -5,7 +5,7 @@
 
 class HttpClient : public BaseClient  {
   public:
-    void get(const char *);
+    char* get(const char *);
 };
 
 #endif

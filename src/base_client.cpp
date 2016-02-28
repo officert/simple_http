@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void BaseClient::send_message(const char* address, const char* message, const int port)
+char* BaseClient::send_message(const char* address, const char* message, const int port)
 {
   if (address == NULL)
   {
@@ -18,15 +18,13 @@ void BaseClient::send_message(const char* address, const char* message, const in
 
   int socket_desc;
   struct sockaddr_in server;
-  char server_reply[2000];
+  char *server_reply = new char[2000];
 
   socket_desc = socket(AF_INET, SOCK_STREAM, 0);
 
   if (socket_desc == -1)
   {
-    printf("Could not create socket\n");
-  } else {
-    printf("Socket created\n");
+    throw "Error creating ocket";
   }
 
   server.sin_addr.s_addr = inet_addr(address);
@@ -35,28 +33,26 @@ void BaseClient::send_message(const char* address, const char* message, const in
 
   int connected = connect(socket_desc, (struct sockaddr *)&server, sizeof(server));
 
-  if(connected >= 0) {
-    puts("Connected");
-  } else {
-    puts("Error connecting");
+  if (connected < 0)
+  {
+    throw "Error connecting to socket";
   }
 
   int message_sent = write(socket_desc, message, strlen(message));
 
-  if (message_sent < 0) {
-    puts("Send failed");
+  if (message_sent < 0)
+  {
+    throw "Error sending to socket message";
   } else {
-    puts("Data Sent\n");
+    int message_received = recv(socket_desc, server_reply, 2000, 0);
 
-    int messageReceived = read(socket_desc, server_reply, 2000);
-
-    if (messageReceived < 0) {
-      puts("recv failed");
-    } else {
-      puts("Reply received\n");
-      puts(server_reply);
+    if (message_received < 0)
+    {
+      throw "Error receiving socket message";
     }
 
     close(socket_desc);
   }
+
+  return server_reply;
 }

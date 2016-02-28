@@ -3,7 +3,7 @@
 
 class BaseClient {
   protected:
-    void send_message(const char* address, const char* message, const int port);
+    char* send_message(const char* address, const char* message, const int port);
 };
 
 #endif
