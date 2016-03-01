@@ -12,15 +12,17 @@ int main(int argc, char* argv[]) {
 	HttpClient httpClient;
 	std::string response;
 
-	cout << "ARGS" << endl;
-	validate_args(argc, argv);
-	cout << endl;
+	try {
+		validate_args(argc, argv);
+	} catch(const char* exception) {
+		cout << "Error : " << exception << endl;
 
-	const std::string address = argv[1];
+		return 1;
+	}
+
+	std::string address = argv[1];
 
 	try {
-		cout << "address " << address << endl;
-
 		response = httpClient.get(address);
 
 		cout << endl << response << endl;
@@ -32,14 +34,15 @@ int main(int argc, char* argv[]) {
 }
 
 void validate_args(int argc, char* argv[]) {
-	cout << "argc = " << argc << endl;
-   for(int i = 0; i < argc; i++)
-      cout << "argv[" << i << "] = " << argv[i] << endl;
-}
+	// cout << "argc = " << argc << endl;
 
-//
-// void display_help() {
-// 	cout << "--------------------------------" << endl;
-// 	cout << "Server Util" << endl;
-// 	cout << "--------------------------------" << endl;
-// }
+  // for(int i = 0; i < argc; i++)
+	// {
+	// 	cout << "argv[" << i << "] = " << argv[i] << endl;
+	// }
+
+	if(argc < 2)
+	{
+		throw "Must pass arg a";
+	}
+}
